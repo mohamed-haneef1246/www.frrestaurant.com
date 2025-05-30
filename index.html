@@ -1,29 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Restaurant Order Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .login-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .dashboard-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .form-control {
+            border-radius: 25px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(106, 17, 203, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 15px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Login Page -->
+    <div id="loginPage" class="container-fluid">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-container">
+                    <div class="login-header text-center">
+                        <h2><i class="fas fa-hotel"></i> FR RESTAURANT</h2>
+                        <p class="mb-0">Please login to continue</p>
+                    </div>
+                    <div class="login-body">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="userType" class="form-label">User Type</label>
+                                <select class="form-select" id="userType" required>
+                                    <option value="" selected disabled>Select user type</option>
+                                    <option value="customer">Customer</option>
+                                    <option value="employee">Employee</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Enter username"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mobile" class="form-label">Mobile Number</label>
+                                <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number"
+                                    required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <div class="restaurant-header">🍽️ FR Restaurant</div>
+    <!-- Admin Dashboard -->
+    <div id="adminPage" class="container my-5 hidden">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-hotel"></i> FR RESTAURANT - Admin</a>
+                <button class="btn btn-danger ms-auto" id="adminLogoutBtn">Logout</button>
+            </div>
+        </nav>
 
-  <div class="login-box">
-    <h4 class="text-center mb-4">Login to Order</h4>
-    <form id="loginForm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Your Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-      </div>
-      <div class="mb-3">
-        <label for="mobile" class="form-label">Mobile Number</label>
-        <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number" pattern="[0-9]{10}" required>
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Login</button>
-    </form>
-  </div>
+        <div class="dashboard-container">
+            <h2 class="text-center mb-4">Admin Dashboard</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Users</h5>
+                            <p class="card-text display-4">124</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Today's Orders</h5>
+                            <p class="card-text display-4">42</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Revenue</h5>
+                            <p class="card-text display-4">$12,450</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- Order Page (Hi
+    <!-- Employee Dashboard -->
+    <div id="employeePage" class="container my-5 hidden">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-hotel"></i> FR Restaurant - Employee</a>
+                <button class="btn btn-danger ms-auto" id="employeeLogoutBtn">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <h2 class="text-center mb-4">Today's Orders</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1001</td>
+                        <td>John Doe</td>
+                        <td>Pizza, Coke</td>
+                        <td>$12.99</td>
+                        <td><span class="badge bg-warning">Preparing</span></td>
+                    </tr>
+                    <tr>
+                        <td>#1002</td>
+                        <td>Jane Smith</td>
+                        <td>Burger, Fries</td>
+                        <td>$8.99</td>
+                        <td><span class="badge bg-success">Delivered</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Manager Dashboard -->
+    <div id="managerPage" class="container my-5 hidden">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-hotel"></i> Hotel Delight - Manager</a>
+                <button class="btn btn-danger ms-auto" id="managerLogoutBtn">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <h2 class="text-center mb-4">Sales Dashboard</h2>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Today's Sales</h5>
+                            <canvas id="salesChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Revenue Summary</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Today's Revenue
+                                    <span class="badge bg-primary rounded-pill">$1,245</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Weekly Revenue
+                                    <span class="badge bg-success rounded-pill">$8,745</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Page -->
+    <div id="customerPage" class="container my-5 hidden">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-hotel"></i> Hotel Delight</a>
+                <div class="ms-auto d-flex">
+                    <button class="btn btn-primary me-2" id="viewCartBtn">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="badge bg-light text-dark" id="cartCount">0</span>
+                    </button>
+                    <button class="btn btn-danger" id="customerLogoutBtn">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <h2 class="text-center mb-4">Our Delicious Menu</h2>
+            <div class="row" id="productsContainer">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div id="cartPage" class="container my-5 hidden">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-hotel"></i> Hotel Delight</a>
+                <div class="ms-auto d-flex">
+                    <button class="btn btn-outline-light me-2" id="backToMenuBtn">
+                        <i class="fas fa-utensils"></i> Menu
+                    </button>
+                    <button class="btn btn-danger" id="cartLogoutBtn">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <h2 class="text-center mb-4">Your Order Cart</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Items</h5>
+                            <div id="cartItems">
+                                <!-- Cart items will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Summary</h5>
+                            <div id="orderSummary">
+                                <!-- Order summary will be loaded here -->
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3" id="checkoutBtn">Proceed to Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: "1",
+                name: "PARROTA",
+                description: "Classic Kumari Bun Parrota",
+                price: 12.00,
+                image: "data:image/jpeg;base64,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"
+            },
+            {
+                id: "2",
+                name: "ChICKEN 65",
+                description: "Juicy beef patty with cheese, lettuce, and special sauce",
+                price: 8.99,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcu2TkuCgd9xyhxCr6MMDFUzwBi69InW2Pww&s"
+            },
+            {
+                id: "3",
+                name: "KFC Chicken",
+                description: "Spaghetti with creamy egg sauce, pancetta, and parmesan",
+                price: 14.50,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8JlWGheIlfIzO0ZIpLn2C5XHp5BQOQwRlww&s"
+            }
+        ];
+
+        // DOM Elements
+        const pages = {
+            login: document.getElementById('loginPage'),
+            admin: document.getElementById('adminPage'),
+            employee: document.getElementById('employeePage'),
+            manager: document.getElementById('managerPage'),
+            customer: document.getElementById('customerPage'),
+            cart: document.getElementById('cartPage')
+        };
+
+        // Login Functionality
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const userType = document.getElementById('userType').value;
+            const username = document.getElementById('username').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+
+            // Hide all pages first
+            Object.values(pages).forEach(page => page.classList.add('hidden'));
+
+            // Show the appropriate page based on user type
+            switch (userType) {
+                case 'admin':
+                    if (username === 'mohamedrafi' && mobile === 'may30') {
+                        pages.admin.classList.remove('hidden');
+                    } else {
+                        alert('Invalid admin credentials');
+                        pages.login.classList.remove('hidden');
+                    }
+                    break;
+                case 'employee':
+                    if (username === 'employee' && mobile === '1245') {
+                        pages.employee.classList.remove('hidden');
+                    } else {
+                        alert('Invalid admin credentials');
+                        pages.login.classList.remove('hidden');
+                    }
+                    break;
+
+                case 'manager':
+                    pages.manager.classList.remove('hidden');
+                    // Initialize chart
+                    initSalesChart();
+                    break;
+                case 'customer':
+                    pages.customer.classList.remove('hidden');
+                    loadProducts();
+                    break;
+                default:
+                    alert('Please select a valid user type');
+                    pages.login.classList.remove('hidden');
+            }
+        });
+
+        // Logout Buttons
+        document.getElementById('adminLogoutBtn').addEventListener('click', logout);
+        document.getElementById('employeeLogoutBtn').addEventListener('click', logout);
+        document.getElementById('managerLogoutBtn').addEventListener('click', logout);
+        document.getElementById('customerLogoutBtn').addEventListener('click', logout);
+        document.getElementById('cartLogoutBtn').addEventListener('click', logout);
+
+        function logout() {
+            // Hide all pages and show login page
+            Object.values(pages).forEach(page => page.classList.add('hidden'));
+            pages.login.classList.remove('hidden');
+        }
+
+        // Customer Page Functions
+        function loadProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                container.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card h-100">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description}</p>
+                                <p class="text-success fw-bold">${product.price}</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary minus-btn" type="button">-</button>
+                                    <input type="number" class="form-control text-center quantity-input" value="0" min="0">
+                                    <button class="btn btn-outline-secondary plus-btn" type="button">+</button>
+                                </div>
+                                <button class="btn btn-primary w-100 mt-2 add-to-cart" data-id="${product.id}">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Add event listeners for quantity buttons
+            document.querySelectorAll('.plus-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const input = this.parentElement.querySelector('.quantity-input');
+                    input.value = parseInt(input.value) + 1;
+                });
+            });
+
+            document.querySelectorAll('.minus-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const input = this.parentElement.querySelector('.quantity-input');
+                    if (parseInt(input.value) > 0) {
+                        input.value = parseInt(input.value) - 1;
+                    }
+                });
+            });
+
+            // Add to cart functionality
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const productId = this.getAttribute('data-id');
+                    const quantity = parseInt(this.parentElement.querySelector('.quantity-input').value);
+
+                    if (quantity > 0) {
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        const existingItem = cart.find(item => item.id === productId);
+
+                        if (existingItem) {
+                            existingItem.quantity += quantity;
+                        } else {
+                            const product = products.find(p => p.id === productId);
+                            cart.push({
+                                id: productId,
+                                name: product.name,
+                                price: product.price,
+                                quantity: quantity
+                            });
+                        }
+
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartCount();
+                        alert('Item added to cart!');
+                    } else {
+                        alert('Please select at least 1 quantity');
+                    }
+                });
+            });
+
+            updateCartCount();
+        }
+
+        // View Cart Button
+        document.getElementById('viewCartBtn').addEventListener('click', function () {
+            Object.values(pages).forEach(page => page.classList.add('hidden'));
+            pages.cart.classList.remove('hidden');
+            loadCart();
+        });
+
+        // Back to Menu Button
+        document.getElementById('backToMenuBtn').addEventListener('click', function () {
+            Object.values(pages).forEach(page => page.classList.add('hidden'));
+            pages.customer.classList.remove('hidden');
+        });
+
+        // Cart Functions
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cartItems');
+            const orderSummaryContainer = document.getElementById('orderSummary');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-center">Your cart is empty</p>';
+                orderSummaryContainer.innerHTML = '<p class="text-center">No items in cart</p>';
+                document.getElementById('checkoutBtn').disabled = true;
+                return;
+            }
+
+            // Display cart items
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>${item.name}</h6>
+                            <small class="text-muted">$${item.price} x ${item.quantity}</small>
+                        </div>
+                        <div>
+                            <span class="fw-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+                            <button class="btn btn-sm btn-outline-danger ms-2 remove-item" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Display order summary
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.1; // 10% tax
+            const total = subtotal + tax;
+
+            orderSummaryContainer.innerHTML = `
+                <div class="d-flex justify-content-between">
+                    <span>Subtotal:</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Tax (10%):</span>
+                    <span>$${tax.toFixed(2)}</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total:</span>
+                    <span>$${total.toFixed(2)}</span>
+                </div>
+            `;
+
+            // Add event listeners for remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const productId = this.getAttribute('data-id');
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart = cart.filter(item => item.id !== productId);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    loadCart();
+                    updateCartCount();
+                });
+            });
+
+            document.getElementById('checkoutBtn').disabled = false;
+        }
+
+        // Checkout Button
+        document.getElementById('checkoutBtn').addEventListener('click', function () {
+            alert('Order placed successfully! Thank you for your purchase.');
+            localStorage.removeItem('cart');
+            updateCartCount();
+            Object.values(pages).forEach(page => page.classList.add('hidden'));
+            pages.customer.classList.remove('hidden');
+        });
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        // Initialize sales chart for manager
+        function initSalesChart() {
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
+                    datasets: [{
+                        label: 'Sales ($)',
+                        data: [450, 1200, 1800, 300],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
