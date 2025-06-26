@@ -1,192 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Best Care Pharmacy</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <style>
     body {
-      scroll-behavior: smooth;
       font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
-    section {
-      padding: 60px 20px;
+
+    .section {
+      display: none;
       min-height: 100vh;
-    }
-    .navbar {
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    .hero {
-      background: linear-gradient(to right, #007bffcc, #00c6ffcc), 
-                  url('https://images.unsplash.com/photo-1588776814546-ec7f64b6e1ab') center/cover;
-      color: white;
+      padding: 2rem 1rem;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
-    .hero h1 {
-      animation: fadeInDown 1s ease-in-out;
+
+    .active {
+      display: flex;
+      flex-direction: column;
     }
-    .hero p {
-      animation: fadeInUp 1s ease-in-out;
+
+    .welcome {
+      background: url('https://i.pinimg.com/originals/f6/3b/91/f63b91c7281425a7c46c7e28479cd3c2.jpg') center center/cover no-repeat;
+      color: white;
     }
-    @keyframes fadeInDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+
+    .invitation {
+      background: url('https://images.unsplash.com/photo-1504198458649-3128b932f49b?auto=format&fit=crop&w=1280&q=80') center center/cover no-repeat;
+      color: white;
     }
-    @keyframes fadeInUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+
+    .invitation h1,
+    .invitation h2 {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 10px;
     }
-    .card:hover {
-      transform: scale(1.03);
-      transition: 0.3s ease;
+
+    .gif {
+      width: 100%;
+      max-width: 200px;
+      margin-top: 20px;
     }
+
+    .btn-custom {
+      background-color: #dc143c;
+      border: none;
+      color: white;
+    }
+
     @media (max-width: 576px) {
-      .display-4 {
-        font-size: 2rem;
+      .invitation h2 {
+        font-size: 1.3rem;
+      }
+
+      .invitation h1 {
+        font-size: 1.5rem;
+      }
+
+      .lead {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70">
 
-<!-- Navbar -->
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">Best Care Pharmacy</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navContent" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#stock">Stock</a></li>
-        <li class="nav-item"><a class="nav-link" href="#order">Order</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<body>
 
-<!-- Hero -->
-<section id="home" class="hero d-flex flex-column justify-content-center align-items-center text-white">
-  <div class="container">
-    <h1 class="display-4 fw-bold  text text-primary">Welcome to  Best Care Pharmacy</h1>
-    <p class="lead mb-4">Reliable. Affordable. Fast Medical Services.</p>
-    <a href="#stock" class="btn btn-light btn-lg"><i class="bi bi-capsule"></i> View Stock</a>
-  </div>
-</section>
+  <!-- Page 1: Input -->
+  <section id="page1" class="section active bg-warning">
+    <div class="container py-5">
+      <h1 class="mb-3 text-dark fw-bold">You're Invited!</h1>
 
-<!-- Stock -->
-<section id="stock" class="bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5"><i class="bi bi-box-seam"></i> Our Stock</h2>
-    <div class="row g-4">
-      <!-- Medicine Card -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <div class="card shadow-sm">
-          <div class="card-body text-center">
-            <h5 class="card-title">Paracetamol</h5>
-            <p>₹20 | Pain relief</p>
-            <span class="badge bg-success">In Stock</span>
-          </div>
-        </div>
+      <h4 class="text-center text-dark mb-3"><em>بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</em></h4>
+      <p class="lead text-dark">
+        <strong>In the name of Allah, the Most Gracious, the Most Merciful</strong><br>
+        We are honored to invite you to witness and bless the sacred union of two souls under the guidance of the
+        Almighty.
+      </p>
+
+      <p class="text-muted mt-3">من دواعي سرورنا أن ندعوكم لحضور حفل النكاح ومشاركتنا فرحة هذا اليوم المبارك</p>
+
+      <hr class="my-4 border-dark">
+
+      <div class="mb-3">
+        <label for="guestName" class="form-label fw-semibold text-dark">Please enter your name to begin the
+          invitation</label>
+        <input type="text" id="guestName" class="form-control" placeholder="اكتب اسمك / Enter your name" />
       </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <div class="card shadow-sm">
-          <div class="card-body text-center">
-            <h5 class="card-title">Cetrizine</h5>
-            <p>₹15 | Allergy</p>
-            <span class="badge bg-success">In Stock</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <div class="card shadow-sm">
-          <div class="card-body text-center">
-            <h5 class="card-title">Dolo 650</h5>
-            <p>₹25 | Fever</p>
-            <span class="badge bg-danger">Out of Stock</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <div class="card shadow-sm">
-          <div class="card-body text-center">
-            <h5 class="card-title">Amoxicillin</h5>
-            <p>₹40 | Antibiotic</p>
-            <span class="badge bg-warning">Low Stock</span>
-          </div>
-        </div>
+
+      <button class="btn btn-dark px-4 py-2 mt-2" onclick="startInvitation()">Start Invitation</button>
+
+      <div class="mt-4">
+        <img src="https://media.tenor.com/x8v1oNUOmg4AAAAd/rickroll-roll.gif" class="gif" id="loadingGif"
+          style="display:none;" />
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Order -->
-<section id="order" class="bg-white">
-  <div class="container">
-    <h2 class="text-center mb-4"><i class="bi bi-cart4"></i> Order Medicine</h2>
-    <form id="orderForm" class="row g-3 needs-validation" novalidate>
-      <div class="col-md-6">
-        <label for="name" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="name" required />
-      </div>
-      <div class="col-md-6">
-        <label for="medicine" class="form-label">Medicine Name</label>
-        <input type="text" class="form-control" id="medicine" required />
-      </div>
-      <div class="col-12">
-        <label for="notes" class="form-label">Additional Notes</label>
-        <textarea id="notes" class="form-control" rows="3"></textarea>
-      </div>
-      <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary px-5">Submit</button>
-      </div>
-    </form>
-  </div>
-</section>
 
-<!-- Contact -->
-<section id="contact" class="bg-light text-center">
-  <div class="container">
-    <h2 class="mb-4"><i class="bi bi-telephone-forward-fill"></i> Contact Us</h2>
-    <p><strong>Address:</strong> 123 Wellness Street, Healthy Town</p>
-    <p><strong>Phone:</strong> +91 98765 43210</p>
-    <p><strong>Email:</strong> contact@medistoreplus.com</p>
-    <div class="mt-3">
-      <a href="#" class="text-primary me-3"><i class="bi bi-facebook fs-4"></i></a>
-      <a href="#" class="text-info me-3"><i class="bi bi-twitter fs-4"></i></a>
-      <a href="#" class="text-danger"><i class="bi bi-instagram fs-4"></i></a>
+  <!-- Page 2: Welcome Page -->
+  <section id="page2" class="section welcome text-white bg-warning">
+    <div class="container py-5">
+      <h1 id="welcomeMessage" class="mb-3 fw-bold">Welcome!</h1>
+
+      <p class="lead fs-5">
+        We are truly blessed to have someone as special as you in our lives.<br>
+        Your presence at our wedding will bring more joy, more love, and more meaning to our celebration.
+      </p>
+
+      <p class="fs-6 mt-3">
+        This day is not complete without you. You are not just a guest — <strong>you are family</strong> to us, and we
+        sincerely hope you will join us on this most sacred and joyful occasion.
+      </p>
+
+      <hr class="my-4 border-light">
+
+      <div class="text-center">
+        <p class="fs-5"><em>ندعوك بكل حب لحضور حفل نكاحنا المبارك</em></p>
+        <p class="fs-6">وجودك معنا يزيد هذا اليوم سعادة وبركة — فأنتم أهل لنا قبل أن تكونوا ضيوفاً</p>
+        <p class="fs-6"><strong>نحن في انتظارك بفارغ الصبر</strong></p>
+      </div>
+
+      <p class="mt-4"><em>"You are very special to us — and we can’t wait to celebrate this beautiful day with
+          you!"</em></p>
+
+      <button class="btn btn-light mt-4 px-4 py-2 fw-semibold" onclick="nextPage()">Continue to Invitation</button>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Toast Message -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-  <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert">
-    <div class="d-flex">
-      <div class="toast-body">
-        ✅ Order request submitted!
-      </div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+
+  <!-- Page 3: Nikah Invitation -->
+  <section id="page3" class="section invitation bg-warning">
+    <div class="container">
+      <h1 class="mb-4">Nikah Invitation</h1>
+      <h4 class="mb-3"><em>بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</em></h4>
+      <p class="lead mb-4">In the name of Allah, the Most Gracious, the Most Merciful</p>
+
+      <h2 class="mt-4">👰 Aleema shajnu BE <br><span class="fs-6 text-light">daughter of Mr. & Mrs. Abdul Rahman</span>
+      </h2>
+      <h4 class="my-3">and</h4>
+      <h2>🤵 Umar farook BE <br><span class="fs-6 text-light">son of Mr. & Mrs. Kareem</span></h2>
+
+      <p class="mt-4 lead">Request the honour of your presence<br>at the auspicious occasion of their
+        <strong>Nikah</strong> ceremony.
+      </p>
+
+      <p class="mt-3"><strong>📅 Date:</strong> Friday, 18th July 2025</p>
+      <p><strong>🕒 Time:</strong> 11:00 AM onwards</p>
+      <p><strong>📍 Venue:</strong> Al Noor Convention Hall, Chennai, Tamil Nadu</p>
+
+      <p class="mt-4 px-2"><em>"And among His signs is that He created for you spouses from among yourselves so that you
+          may
+          find tranquility in them, and He placed between you affection and mercy..."</em><br>— <strong>Surah Ar-Rum
+          30:21</strong></p>
+
+      <p class="mt-5"><strong>With Duas,</strong><br>The Families of Fathima & Ahmed</p>
     </div>
-  </div>
-</div>
+  </section>
 
-<script>
-  const form = document.getElementById('orderForm');
-  const toastEl = document.getElementById('successToast');
-  const toast = new bootstrap.Toast(toastEl);
+  <!-- JS Script -->
+  <script>
+    function startInvitation() {
+      const name = document.getElementById('guestName').value.trim();
+      if (!name) {
+        alert("Please enter your name!");
+        return;
+      }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    form.reset();
-    toast.show();
-  });
-</script>
+      document.getElementById("loadingGif").style.display = "block";
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      setTimeout(() => {
+        document.getElementById("page1").classList.remove("active");
+        document.getElementById("page2").classList.add("active");
+        document.getElementById("welcomeMessage").innerText = `Welcome, ${name}!`;
+      }, 3000); // 3 seconds delay
+    }
+
+    function nextPage() {
+      document.getElementById("page2").classList.remove("active");
+      document.getElementById("page3").classList.add("active");
+    }
+  </script>
+
 </body>
+
 </html>
